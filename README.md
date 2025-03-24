@@ -66,8 +66,8 @@ This repository provides a solution to back up and recreate Docker containers, n
 - Shared memory size (--shm-size) and CPU limits (--cpus) are included in the docker run commands if applicable.
 
 ## Limitations
-- The script does not back up container data stored in anonymous volumes. Ensure you back up any important data separately.
-- The script assumes the Docker socket is accessible and the user has sufficient permissions to interact with it.
+- The script does not back up container data stored in volumes. Ensure you back up data in volumes separately. The script will simply recreate all named volumes, networks and containers as they were at the time the backup was run.
+- Currently only tested on Linux based server, Windows or other OS may need changes to the script
 
 ## Contributing
 - Contributions are welcome! Feel free to submit pull requests to improve this repository.
