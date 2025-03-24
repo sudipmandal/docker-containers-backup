@@ -54,10 +54,11 @@ This repository provides a solution to back up and recreate Docker containers, n
     docker-containers-backup:v1.0
    ```
 4. **View the Output**
-   The generated commands will be saved in the /path/to/backup/folder/on/host/docker_commands.sh file. You can inspect the file:
+   The generated commands will be saved in the path specified in the above command to a file named docker_commands.sh. You can inspect the file:
    ```bash
    cat /path/to/backup/folder/on/host/docker_commands.sh
    ```
+   Ensure to give execute permission to the above file before running it.
 
 ## Notes
 
