@@ -1,3 +1,4 @@
+![Banner image](https://github.com/sudipmandal/docker-containers-backup/blob/master/assets/repo_logo.png)
 # Docker Containers Backup
 
 This repository provides a solution to back up and recreate Docker containers, networks, and volumes running on a host system. It generates the necessary `docker` commands to recreate the current state of all running containers, including their configurations, custom networks, and named volumes.
