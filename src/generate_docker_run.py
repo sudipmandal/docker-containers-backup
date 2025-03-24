@@ -15,7 +15,7 @@ def generate_docker_run_commands():
         devices = container_info.get('HostConfig', {}).get('Devices', [])
         user = container_info['Config'].get('User', '')
         restart_policy = container_info['HostConfig']['RestartPolicy'].get('Name', '')
-        network = list(container_info['NetworkSettings']['Networks'].keys())[0]
+        network_mode = container_info['HostConfig']['NetworkMode']
         hostname = container_info['Config'].get('Hostname', '')
         dns = container_info['HostConfig'].get('Dns', [])
 
@@ -45,9 +45,22 @@ def generate_docker_run_commands():
         if restart_policy:
             command += f" --restart {restart_policy}"
 
-        # Add network
-        if network:
-            command += f" --network {network}"
+        # Handle network mode
+        if network_mode.startswith("container:"):
+            # Extract the container ID and get its name
+            network_container_id = network_mode.split(":")[1]
+            try:
+                network_container = client.containers.get(network_container_id)
+                network_container_name = network_container.name
+                command += f" --network container:{network_container_name}"
+            except docker.errors.NotFound:
+                command += f" --network container:{network_container_id}"  # Fallback to container ID
+        else:
+            # Add network (if available)
+            networks = container_info['NetworkSettings']['Networks']
+            if networks:
+                network = list(networks.keys())[0]  # Get the first network
+                command += f" --network {network}"
 
         # Add DNS
         if dns:
