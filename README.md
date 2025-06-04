@@ -40,7 +40,7 @@ This repository provides a solution to back up and recreate Docker containers, n
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/sudipmandal/docker-containers-backup.git
-   cd docker-containers-backup
+   cd docker-containers-backup/src
    ```
 2. **Build the Docker Container**
    ```bash
